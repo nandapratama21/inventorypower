@@ -2,11 +2,11 @@ from django.shortcuts import render
 
 def show_main(request):
     context = {
-        'name': 'Pak Bepe',
-        'class': 'PBP A',
+        'name': 'Muhammad Nanda Pratama',
+        'class': 'PBP C',
         '1x1':'Nama',
         '1x2':'Harga',
-        '1x3':'Kapasitas',
+        '1x3':'Stok',
         '2x1':'Mie Ayam',
         '2x2':'Rp 18000',
         '2x3':'20',
