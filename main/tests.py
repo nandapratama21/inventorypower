@@ -8,3 +8,10 @@ class mainTest(TestCase):
     def test_main_using_main_template(self):
         response = Client().get('/main/')
         self.assertTemplateUsed(response, 'main.html')
+
+    def test_main_not_contains_unexpected_text(self):
+        response = Client().get('/main/')
+        # Gantilah 'unexpected_text' dengan teks yang tidak boleh ada di halaman '/main/'
+        unexpected_text = 'Unexpected Texts'
+        self.assertNotContains(response, unexpected_text)
+
