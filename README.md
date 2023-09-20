@@ -2,7 +2,9 @@ Nama    : Muhammad Nanda Pratama
 
 NPM     : 2206081654
 
-Kelas   : PBP C
+Kelas   : PBP C  
+
+TUGAS 2
 
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
 Jawaban: Saya mengikuti cara yang ada di tutorial dengan ada perubahan sedikit untuk tugas 2 ini, yaitu untuk nama git repository menjadi inventorypower, nama project django menjadi inventorypower, dan tampilan _webpage_ nya.  
@@ -45,4 +47,29 @@ ViewModel: ViewModel merupakan perantara antara Model dan View. Tugasnya untuk m
 
 Untuk testing, saya menambahkan testing test_main_not_contains_unexpected_text untuk teks yang tidak boleh ada di halaman '/main/'
 
-Sumber: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page
+Sumber: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page  
+
+TUGAS 3  
+1. Apa perbedaan antara form POST dan form GET dalam Django?  
+Jawaban: GET dan POST sama-sama merupakan metode HTML. POST lebih aman daripada GET karena nilai variabel pada POST tidak ditampilkan di URL sedangkan pada GET, nilai variabel ditampilkan di URL. Selain itu, String pada POST juga tidak dibatasi, berbeda dengan GET yang dibatasi hingga 2047 karakter. Secara penggunannya, POST lebih digunakan untuk mengirim data-data yang sentitif contohnya kode, sedangkan GET lebih digunakan untuk mengirim data yang tidak sentitif contohnya seperti Web bacaan.  
+
+2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?  
+Jawaban: - XML _(Extensible Markup Language)_ merupakan _markup languange_ yang mirip dengan HTML, namun dia tidak mengutamakan tampilan seperti HTML. XML biasanya digunakan untuk pertukaran data pada aplikasi _Web_. XML juga memiliki tag pembuka dan penutup yang mirip dengan HTML.  
+- JSON _(JavaScript Object Notation)_ merupakan format data yang juga sering digunakan pada pemograman _web_. JSON lebih sederhana dan lebih mudah dibaca oleh manusia, dan juga lebih cepat diproses oleh komputer daripada XML. Isi JSON umumnya berupa Array dalam JavaScript, jadi lebih _familiar_ untuk para ahli pemograman _web_.  
+- HTML _(Hypertext Markup Language)_ digunakan untuk menampilkan data berupa tampilan di _web_. HTML lebih berfokus kepada penampilan Aplikasi _Web_ yang akan ditampilkan ke _user_.  
+
+3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?  
+Jawaban: JSON sering digunakan dalam pertukaran data antara aplikasi _web_ modern karena JSON cenderung sederhana dan mudah dibaca oleh manusia, selain itu juga mudah diproses oleh mesin (komputer). JSON juga memiliki ukuran yang cenderung ringan sehingga tidak membenani kinerja server ketika mengirimkan JSON.  
+
+4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
+Jawaban: - Membuat input form untuk menambahkan objek model pada app sebelumnya : Saya mengikuti cara Tutorial 2 namun dengan perubahan sedikit untuk nama modelnya, jika di tutorial menggunakan nama "Product", di tugas 3 ini menggunakan nama "Item". Selain itu, saya juga menyesuaikan main.html pada penambahan formnya agar sesuai dengan aplikasi saya.  
+- Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID : Saya juga mengikuti cara Tutorial 2 namun dengan perubahan sedikit untuk nama modelnya seperti yang telah dijelaskan sebelumnya. jika dalam tutorial show_xml dan show_json menggunakan kode "data = Product.objects.all()", pada tugas saya ini, saya menggunakan "data = Item.objects.all()". Begitu juga dengan fungsi show_xml_by_id dan show_json_by_id, saya mengubah "data = Product.objects.filter(pk=id)" menjadi "data = Item.objects.filter(pk=id)".  
+- Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2 : Saya mengikuti cara yang hampir sama dengan tutorial 2, namun ada pebedaan untuk bagian _import_, karena saya menggunakan nama Item untuk model saya, saya menggunakan "from main.views import show_main, create_item, show_xml, show_json, show_xml_by_id, show_json_by_id".  
+
+
+
+![Postman HTML](image/Postman_HTML.png)
+![Postman XML](image/Postman_XML.png)
+![Postman JSON](image/Postman_JSON.png)
+![Postman XML by id](image/Postman_XML_ID.png)
+![Postman JSON by id](image/Postman_JSON_ID.png)

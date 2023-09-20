@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Daftar Makanan</h1>
 
 <h5>Name: </h5>
@@ -5,25 +8,35 @@
 <h5>Class: </h5>
 <p>{{ class }}<p>
 
+
 <table border="1" style = "width: 100%">
     <tr>
-        <th>{{1x1}}</th>
-        <th>{{1x2}}</th>
-        <th>{{1x3}}</th>
+        <th>Nama</th>
+        <th>Harga</th>
+        <th>Deskripsi</th>
+        <th>Tanggal Ditambahkan</th>
     </tr>
-    <tr>
-        <td>{{2x1}}</td>
-        <td>{{2x2}}</td>
-        <td>{{2x3}}</td>
-    </tr>
-    <tr>
-        <td>{{3x1}}</td>
-        <td>{{3x2}}</td>
-        <td>{{3x3}}</td>
-    </tr>
-    <tr>
-        <td>{{4x1}}</td>
-        <td>{{4x2}}</td>
-        <td>{{4x3}}</td>
-    </tr>
+
+{% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+    {% for item in items %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.amount}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.date_added}}</td>
+        </tr>
+    {% endfor %}
 </table>
+
+{% comment %} Untuk menampilkan jumlah item {% endcomment %}
+<p>Kamu menyimpan {{ jumlah_item }} jenis makanan pada aplikasi ini</p>
+
+<br />
+
+<a href="{% url 'main:create_item' %}">
+    <button>
+        Add New Item
+    </button>
+</a>
+{% endblock content %}
