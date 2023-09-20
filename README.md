@@ -66,7 +66,7 @@ Jawaban: - Membuat input form untuk menambahkan objek model pada app sebelumnya 
 - Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID : Saya juga mengikuti cara Tutorial 2 namun dengan perubahan sedikit untuk nama modelnya seperti yang telah dijelaskan sebelumnya. jika dalam tutorial show_xml dan show_json menggunakan kode "data = Product.objects.all()", pada tugas saya ini, saya menggunakan "data = Item.objects.all()". Begitu juga dengan fungsi show_xml_by_id dan show_json_by_id, saya mengubah "data = Product.objects.filter(pk=id)" menjadi "data = Item.objects.filter(pk=id)".  
 - Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2 : Saya mengikuti cara yang hampir sama dengan tutorial 2, namun ada pebedaan untuk bagian _import_, karena saya menggunakan nama Item untuk model saya, saya menggunakan "from main.views import show_main, create_item, show_xml, show_json, show_xml_by_id, show_json_by_id".  
 
-
+Dibawah ini merupakan _screenshot_ dari hasil akses URL menggunakan Postman.
 
 ![Postman HTML](image/Postman_HTML.png)
 ![Postman XML](image/Postman_XML.png)
