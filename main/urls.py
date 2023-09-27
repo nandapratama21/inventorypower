@@ -19,6 +19,6 @@ urlpatterns = [
     path('register/', register, name='register'), 
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
-    path('increment/', increment_amount, name='increment'),
-    path('decrement/', decrement_amount, name='decrement'),
+    path('increment_amount/<int:id>/', increment_amount, name='increment_amount'),
+    path('decrement_amount/<int:id>/', decrement_amount, name='decrement_amount'),
 ]

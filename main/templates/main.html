@@ -25,11 +25,14 @@
             <td>{{item.amount}}</td>
             <td>{{item.description}}</td>
             <td>{{item.date_added}}</td>
-            <a href="{% url 'main:increment' %}">
-                <button>
-                    Increment
-                </button>
-            </a>
+            <form method="post" action="{% url 'main:increment_amount' item.id %}">
+                {% csrf_token %}
+                <button type="submit">Tambahkan</button>
+                </form>
+            <form method="post" action="{% url 'main:decrement_amount' item.id %}">
+                {% csrf_token %}
+                <button type="submit">Kurangkan</button>
+                </form>
         </tr>
     {% endfor %}
 </table>
