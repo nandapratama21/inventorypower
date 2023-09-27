@@ -72,4 +72,40 @@ Dibawah ini merupakan _screenshot_ dari hasil akses URL menggunakan Postman.
 ![Postman XML](image/Postman_XML.png)
 ![Postman JSON](image/Postman_JSON.png)
 ![Postman XML by id](image/Postman_XML_ID.png)
-![Postman JSON by id](image/Postman_JSON_ID.png)
+![Postman JSON by id](image/Postman_JSON_ID.png)  
+
+
+TUGAS 4
+
+1. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya? 
+Jawaban: Django UserCreationForm digunakan untuk membuat form registrasi user yang akan mendaftar. Kelebihannya adalah membuat form registrasi menjadi lebih mudah dan cepat karena form registrasi sudah disediakan oleh Django untuk digunakan, sudah terintegrasi oleh Django, dan sudah bisa memvalidasi input username dan password pengguna secara otomatis. Kekurangannya adalah karena cenderung mudah dibuat, kita jadi lebih sulit untuk membuat kasus khusus untuk login, sehingga kita harus membuat form registrasi sendiri untuk melakukan itu.
+
+2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?  
+Jawaban: autentikasi adalah proses memverifikasi identitas _user_ yang akan login. autentikasi bertujuan untuk memverifikas apakah _user_ tersebut adalah _user_ yang sah pada _web_ tersebut. Otorisasi adalah proses memverifikasi apakah _user_ dapat mengakses sesuatu di website tersebut, contohnya pada _website_ kuis, _user_ tidak memiliki akses untuk mengubah jawaban pada kuis yang bukan buatannya. Autentikasi dan otorisasi sangat penting karena bertujuan untuk melindungi data yang penting yang pada aplikasi _web_ tersebut.  
+
+3. Apa itu _cookies_ dalam konteks aplikasi _web_, dan bagaimana Django menggunakan _cookies_ untuk mengelola data sesi pengguna?  
+Jawaban: Cookies pada konteks aplikasi _web_ adalah data yang disimpan pada sisi _client_ untuk menyimpan informasi dan preferensi tentang _user_ tersebut. Hal ini mbembantu pihak dari _server_ _web_ tersebut untuk mengenali _user_ yang kembali ke aplikasi _web_ tersebut.  
+Django menggunakan _cookies_ untuk mengelola data sesi pengguna secara otomatis, jadi ketika _user_ mengakses aplikasi _web_ tersebut, Django akan menyimpan informasi tentang _user_ tersebyt pada _cookies_, informasi otentikasi, atau preferensi pengguna.  
+Cara Django menggunakan cookies untuk mengelola data sesi pengguna biasanya melibatkan langkah-langkah berikut:
+
+    Membuat atau Memuat Sesi: Django akan membuat sesi pengguna secara otomatis ketika pengguna masuk atau berinteraksi dengan situs. Informasi sesi ini kemudian disimpan di server dan ID sesi-nya disematkan dalam cookie di sisi klien.
+
+    Mengakses Data Sesi: Setelah sesi pengguna terbuat, Django bisa menyimpan atau mengambil data terkait sesi tersebut. Misalnya, data keranjang belanja, preferensi tampilan, atau informasi otentikasi.
+
+    Menyimpan Data dalam Cookie: Informasi sesi yang diambil dari server akan dienkripsi (agar lebih aman) dan kemudian disimpan dalam cookie di sisi klien.
+
+    Menggunakan Data Sesi: Setiap kali pengguna membuat permintaan (request) ke server, Django akan membaca cookie sesi, mengidentifikasi sesi pengguna, dan memungkinkan akses ke data sesi tersebut.
+
+    Memperbarui atau Menghapus Data Sesi: Django juga bisa memperbarui atau menghapus data sesi pengguna sesuai dengan interaksi atau perubahan yang terjadi dalam aplikasi.
+
+
+4. Apakah penggunaan _cookies_ aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?  
+Jawaban: _Cookies_ secara default tidak sepenuhnya aman dalam pengembangan _web_, karena ada risiko potensial yang harus diwaspadai, terutama jika ada serangan XSS _(Cross Site Scripting)_, di mana penyerang dapat mengambil informasi pribadi dari _user_ dengan mengubah kode di halaman _web_ yang dieksekusi oleh browser _user_ tersebut.  
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
+Jawaban:   
+- Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar: Saya mengikuti hal-hal di tutorial namun saya memerhatikan kondisi untuk aplikasi saya.  
+- Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal: Saya sudah melakukannya dengan membuat dua akun, kemudian saya buat tiga dummy data.  
+- Menghubungkan model Item dengan User: Saya mengikuti cara di tutorial dengan memperhatikan kondisi untuk aplikasi saya, pada aplikasi saya, namanya Item, bukan Product.
+-  Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi: Saya sudah mencobanya dan memperhatikannya, dan mirip dengan tutorial untuk ini.
+
