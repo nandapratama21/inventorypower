@@ -109,3 +109,62 @@ Jawaban:
 - Menghubungkan model Item dengan User: Saya mengikuti cara di tutorial dengan memperhatikan kondisi untuk aplikasi saya, pada aplikasi saya, namanya Item, bukan Product.
 -  Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi: Saya sudah mencobanya dan memperhatikannya, dan mirip dengan tutorial untuk ini.
 
+TUGAS 5
+
+1. Jelaskan manfaat dari setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya.   
+Jawaban: Pada CSS (Cascading Style Sheet) Banyak terdapat _element selector_ yang dapat digunakan, di antaranya  
+``````
+- Tag Selector : Selector ini digunakan untuk memilih elemen menggunakan _tag_. Manfaatnya untuk membuat _styling_ untuk jenis _elemen_ tertentu.
+- Class Selector : Selector ini digunakan untuk memilih _elemen_ menggunakan _class_. Manfaatnya adalah kita bisa memberikan _styling_ yang sama untuk beberapa elemen pada kelas yang sama tanpa harus mengulang kode CSS tersebut.  
+- ID Selector : Selector ini mirip dengan Selector Class, hanya saja ID Selector ini untuk tiap ID yang bersifat unik, jadi tiap elemen memiliki ID nya sendiri. Manfaatnya untuk memberikan _styling_ pada elemen tertentu saja.  
+- Universal Selector : Selector ini digunakan untuk memberikan _styling_ ke semua elemen di halaman _web_.  
+- Pseudo-class Selector : Selector ini digunakan untuk memberikan _styling_ ketika ada kondisi tertentu, contohnya ketika kita menekan tombol di _keyboard_. Dengan _selector_ ini kita bisa menetapkan _styling_ ketika pada keadaan tersebut.  
+- Pseudo-element Selector : Selector ini membuat _styling_ elemen semu di dalam elemen sebenarnya, Misalnya kita ingin memberikan _styling_ hanya sebagian pada 1 elemen tersebut, kita bisa menggunakan _selector_ ini untuk menerapkan _styling_ tersebut.  
+``````
+
+2. Jelaskan HTML5 Tag yang kamu ketahui.  
+Jawaban: Ada beberapa HTML5 Tag yang perlu diketahui, di antaranya:  
+
+- `<header>` : Tag ini digunakan untuk menampilkan _header_ pada bagian atas halaman _web_. Biasanya, _header_ diguanakan untuk meletakkan judul dan logo _web_ tersebut.
+- `<nav>` : Tag ini digunakan untuk membuat _navigation bar_ pada aplikasi _web_.  
+- `<video>` : Tag ini Untuk menampilkan video pada halaman _web_.  
+- `<audio>` : Tag ini untuk memberikan _audio_ pada halaman _web_.  
+- `<canvas>` : Tag ini digunakan untuk membuat grafis dan animasi langsung di halaman _web_ tersebut.
+- `<div>` : Tag ini untuk mengelompokkan elemen pada halaman _web_. 
+
+
+
+3. Jelaskan perbedaan antara _margin_ dan _padding_.  
+Jawaban: Perbedaan antara _margin_ dan _padding_ adalah 
+
+- Margin adalah ruang kosong di sekitar elemen pada HTML. Margin merupakan jarak antara elemen tersebut dengan elemen lain di sekitarnya.  
+- Margin tidak memiliki warna _background_.  
+- Margin memengaruhi ruang di luar elemen tersebut. Jadi, ketika kita memberikan margin atas pada sebuah elemen, hal itu itu akan menambahkan jarak di atas elemen tersebut.  
+- Padding adalah ruang kosong di dalam elemen HTML tersebut. Padding merupakan jarak antara konten elemen dan tepi elemen itu sendiri.  
+- Padding dapat memiliki warna _background_. Jadi, jika kita memberikan padding pada sebuah elemen dan memberikan warna _background_, warna tersebut akan muncul di dalam padding tersebut.
+- Padding memengaruhi ruang di dalam elemen. Jadi, jika kita memberikan padding atas pada sebuah elemen, hal itu akan menambahkan jarak antara konten dan bagian atas elemen tersebut.  
+Kesimpulannya adalah: Margin berhubungan dengan ruang di luar elemen tersebut, dan Padding berhubungan dengan ruang di dalam elemen tersebut.  
+
+
+4. Jelaskan perbedaan antara _framework_ CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?  
+Jawaban: Perbedaan antara Tailwind dan Bootstrap adalah    
+
+Pada Tailwind:
+
+
+- Tailwind menggunakan pendekatan Utility-First, yang artinya kita menggunakan _class_ CSS kecil untuk mengatur tampilan elemennya.  
+- Kuatnya kustomisasi: Tailwind memudahkan kita untuk menyesuaikan kustomiasi dengan sangat mendalam. Kita dapat mengubah setiap spesifik desain dengan mudah.  
+- Cenderung ringan : Tailwind cenderung ringan karena hanya berhubungan dengan CSS yang diperlukan.
+
+Pada Bootstrap:  
+
+- Pendekatan Komponen: Bootstrap dibuat berdasarkan pendekatan komponen, yang artinya kita menggunakan kelas CSS yang sudah ditentukan untuk mengatur komponen seperti _navigation bar_.  
+- Desain yang siap digunakan : Bootstrap memiliki desain bawaan yang bagus dan siap digunakan, ini tentu saja memudahkan karena kita tidak perlu melakukan banyak kustomisasi.  
+- Integrasi dengan JavaScript : Bootstrap memiliki integrasi dengan JavaScript sehingga Bootsrap dapat memudahkan interaksi pada halaman _web_.  
+
+Kesimpulannya adalah Tailwind lebih cocok digunakan jika kita cenderung ingin membuat desain sendiri pada aplikasi _web_ kita. Sedangkan Bootstrap lebih cocok digunakan jika kita ingin membuat _website_ yang bagus dengan waktu yang singkat.  
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
+Jawaban: 
+- Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin. : Saya mengikuti cara di tutorial, namun dengan kustomisasi halaman tersebut sesuai dengan tema aplikasi saya.  
+- Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card. : Saya mencari caranya di sumber lain, dan saya pun mengkustomisasi halaman daftar inventori menjadi lebih berwarna, saya memilih warna biru muda.

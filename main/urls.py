@@ -5,7 +5,9 @@ from main.views import login_user
 from main.views import logout_user
 from main.views import increment_amount;
 from main.views import decrement_amount;
-
+from main.views import delete_item;
+from main.views import edit_item;
+from main.views import item_id_last;
 
 app_name = 'main'
 
@@ -21,4 +23,7 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('increment_amount/<int:id>/', increment_amount, name='increment_amount'),
     path('decrement_amount/<int:id>/', decrement_amount, name='decrement_amount'),
+    path('delete_item/<int:id>/', delete_item, name='delete_item'),
+    path('edit_item/<int:id>', edit_item, name='edit_item'),
+    path('last_object', item_id_last, name='last_object'),
 ]

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% include 'navbar.html' %}
 <h1>Daftar Makanan</h1>
 
 <h5>Name: </h5>
@@ -13,19 +14,20 @@
     <tr>
         <th>Nama</th>
         <th>Jumlah</th>
-        <th>Deskripsi</th>
+        <th>Harga</th>
         <th>Tanggal Ditambahkan</th>
     </tr>
 
 {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
     {% for item in items %}
-        <tr>
+        <tr {% if item.id == last_object %}style="background-color: #20a5c3;"{% endif %}>
+            
             <td>{{item.name}}</td>
             <td>{{item.amount}}</td>
             <td>{{item.description}}</td>
             <td>{{item.date_added}}</td>
-            <form method="post" action="{% url 'main:increment_amount' item.id %}">
+            <td><form method="post" action="{% url 'main:increment_amount' item.id %}">
                 {% csrf_token %}
                 <button type="submit">Tambahkan</button>
                 </form>
@@ -33,6 +35,11 @@
                 {% csrf_token %}
                 <button type="submit">Kurangkan</button>
                 </form>
+                <form method="post" action="{% url 'main:delete_item' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Hapus</button>
+                    </form></td>
+
         </tr>
     {% endfor %}
 </table>
@@ -48,11 +55,23 @@
     </button>
 </a>
 
+<tr>
+    <td>
+        <a href="/edit_Item/{{item.pk}}">
+            <button>
+                Edit
+            </button>
+        </a>
+    </td>
+</tr>
+
 <h5>Sesi terakhir login: {{ last_login }}</h5>
 <a href="{% url 'main:logout' %}">
     <button>
         Logout
     </button>
 </a>
+
+
 
 {% endblock content %}

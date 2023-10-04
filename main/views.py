@@ -19,13 +19,17 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login')
 def show_main(request):
     items = Item.objects.filter(user=request.user)
+    last_object = Item.objects.last()
+    last_object = last_object.id
     # items = Item.objects.all()
     # Menghitung jumlah item yang ditambahkan
-    jumlah_item = Item.objects.count()
+    jumlah_item = Item.objects.filter(user=request.user).count()
     context = {
         'name': 'Muhammad Nanda Pratama',
         'class': 'PBP C',
         'items': items,
+        'last_object' : last_object,
+        'jumlah_item': jumlah_item,
         'last_login': request.COOKIES['last_login'],
     }
 
@@ -35,13 +39,28 @@ def create_item(request):
     form = ItemForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        product = form.save(commit=False)
-        product.user = request.user
-        product.save()
+        item = form.save(commit=False)
+        item.user = request.user
+        item.save()
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {'form': form}
     return render(request, "create_item.html", context)
+
+def edit_item(request, id):
+    # Get product berdasarkan ID
+    item = Item.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+    form = ItemForm(request.POST or None, instance=item)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_item.html", context)
 
 
 
@@ -101,11 +120,20 @@ def increment_amount(request, id):
     updated_item = Item.objects.get(pk=id)  # Ambil objeknya
     updated_item.amount += 1 # increment 1
     updated_item.save() # simpan nilainya
-    return HttpResponseRedirect(reverse('main:home'))
+    return HttpResponseRedirect(reverse('main:show_main'))
 
 def decrement_amount(request,id):
     updated_item = Item.objects.get(pk=id) # ambil objeknya
     updated_item.amount -= 1 # decrement 1
     updated_item.save() # simpan nilainya
-    return HttpResponseRedirect(reverse('main:home'))
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def delete_item(request,id):
+    deleted_item = Item.objects.get(pk=id) # ambil objeknya
+    deleted_item.delete() # hapus objeknya
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def item_id_last(request):
+    last_object = Item.objects.last()
+    return render(reverse('main:show_main'), {'last_object': last_object})
 

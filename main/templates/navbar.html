@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #20a5c3;">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+                <span class="navbar-brand">Inventory Power</span>
+            </div>
+            <div class="col text-right">
+                <a class="navbar-brand">Name: {{item.name}}</a>
+            </div>
+            <div class="col text-right">
+                <a class="navbar-brand">Kelas: {{class}}</a>
+            </div>
+            <div class="col ml-auto">
+                
+            <a href="{% url 'main:logout' %}">
+                <button>
+                    Logout
+                </button>
+            </a>
+        </div>
+        </div>
+    </div>
+</nav>
