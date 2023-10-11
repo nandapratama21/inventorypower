@@ -1,19 +1,85 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block content %}
-<h1>Add New Item</h1>
+<style id="body_create_item">
+    body  {
+        margin: 0; height: 100vh; background-image: linear-gradient(to bottom, #125865, #93817d); 
+        background-attachment: fixed; background-size: cover; background-repeat: no-repeat;
+    }
+    .text-custom {
+    color: #000; /* Ganti dengan kode warna yang kamu inginkan */
+}
+    
+    </style>
+<div id = "edit_item_container" class="container mt-5 text-white">
+    
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 id="table_create_item" class="mb-4">Add New Item</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Add Item"/>
-            </td>
-        </tr>
-    </table>
-</form>
+            <form method="POST">
+                {% csrf_token %}
+                <table id="table_create_item_2" class="bg-custom-primary text-custom">
+                    {{ form.as_table }}
+                </table>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% load static %}
+            <script type="application/javascript">
+            function setDarkMode() {
+            document.body.classList.remove("light-mode");
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("theme", "dark");
 
+            // Mengubah kelas elemen pada tabel
+            const body = document.getElementById("body_create_item");
+            const table = document.getElementById("table_create_item");
+            const table_2 = document.getElementById("table_create_item_2");
+            body.innerHTML = `body {margin: 0; height: 100vh; background-image: linear-gradient(to bottom, #125865, #93817d); 
+                background-attachment: fixed; background-size: cover; background-repeat: no-repeat;
+                }`;
+            table.classList.remove("text-dark");
+            table_2.classList.remove("text-dark");
+            table.classList.add("text-light");
+            table_2.classList.add("text-light");
+            
+
+        }
+            function setLightMode() {
+            document.body.classList.remove("dark-mode");
+            document.body.classList.add("light-mode");
+            localStorage.setItem("theme", "light");
+
+
+            // Mengubah kelas elemen pada tabel
+            const body = document.getElementById("body_create_item");
+            const table = document.getElementById("table_create_item");
+            const table_2 = document.getElementById("table_create_item_2");
+            body.innerHTML = `body { background-color: #fff; background-image: url("static/images/Background.png"); background-repeat: no-repeat; background-size: cover;}`;
+            table.classList.remove("text-light");
+            table_2.classList.remove("text-light");
+            table.classList.add("text-dark");
+            table_2.classList.add("text-dark");
+
+        }
+
+            function checkThemePreference() {
+                const theme = localStorage.getItem("theme");
+                if (theme === "dark") {
+                    setDarkMode(); // Jika tema yang disimpan adalah "dark", atur ke Dark Mode
+                } else {
+                    setLightMode(); // Jika tidak, atur ke Light Mode
+                }
+            }
+                // Panggil fungsi checkThemePreference saat halaman dimuat
+                window.onload = checkThemePreference;
+
+
+
+            </script>
+</div>
 {% endblock %}

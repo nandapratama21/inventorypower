@@ -8,3 +8,8 @@ class Item(models.Model):
     amount = models.IntegerField()
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.FloatField()
+    
+class UserPreference(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dark_mode = models.BooleanField(default=False)

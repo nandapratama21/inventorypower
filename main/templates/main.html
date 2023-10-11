@@ -1,77 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style id="body">
+    
+    body {
+        background-image: url("static/images/Background.png");
+        background-repeat: no-repeat;
+        background-color: #1e1e1e;
+        background-size: cover;
+    }
+    .btn-lamp-dark {
+        background: transparent;
+        border: none;
+        color: white;
+    }
+    .btn-lamp-light {
+        background: transparent;
+        border: none;
+        color: black;
+    }
+
+    
+</style>
 {% include 'navbar.html' %}
-<h1>Daftar Makanan</h1>
+{% load static %}
 
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Class: </h5>
-<p>{{ class }}<p>
+<div id = "table_1" class="container mt-4">
+    <h1 class="display-4 text-center mb-5">Food Inventory</h1>
 
+    <div  id="table_2" class="row row-light">
+        {% for item in items %}
+            <div class="col-md-4 mb-4">
+                <div  {% if item.id == last_object %} class="card" style="background-color: rgba(37, 170, 207, 0.7);" {% endif %} {% if item.id != last_object %} class="card text-dark" style=" background-color: rgba(255, 255, 255, 0.7);"   {% endif %}>
+                    <div {% if item.id == last_object %}  class="card-header border-black" {% endif %} {% if item.id != last_object %} id="card_main {{item.id}}" class="card-header border-black" {% endif %}>
+                        <h5 class="card-title">{{ item.name }}</h5>
+                    </div>
+                    <div class="card-body" >
+                        <p class="card-text">Jumlah: {{ item.amount }}</p>
+                        <p class="card-text">Harga: Rp {{ item.price }}</p>
+                        <p class="card-text">Deskripsi: {{ item.description }}</p>
+                        <p class="card-text">Tanggal Ditambahkan: {{ item.date_added }}</p>
+                    </div>
+                    <div class="card-footer text-right border-black d-flex justify-content-end" style="padding-right: 50px;">
+                        <form method="post" action="{% url 'main:increment_amount' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm mx-1">Tambahkan</button>
+                        </form>
+                        <form method="post" action="{% url 'main:decrement_amount' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning btn-sm mx-1">Kurangkan</button>
+                        </form>
+                        <form method="post" action="{% url 'main:edit_item' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary btn-sm mx-1">Edit</button>
+                        </form>
+                        <form method="post" action="{% url 'main:delete_item' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm mx-1">Hapus</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-<table border="1" style = "width: 100%">
-    <tr>
-        <th>Nama</th>
-        <th>Jumlah</th>
-        <th>Harga</th>
-        <th>Tanggal Ditambahkan</th>
-    </tr>
+    <p>Kamu menyimpan {{ jumlah_item }} jenis makanan pada aplikasi ini</p>
 
-{% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+    <a href="{% url 'main:create_item' %}" class="btn btn-primary">Tambahkan Item Baru</a>
 
-    {% for item in items %}
-        <tr {% if item.id == last_object %}style="background-color: #20a5c3;"{% endif %}>
-            
-            <td>{{item.name}}</td>
-            <td>{{item.amount}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.date_added}}</td>
-            <td><form method="post" action="{% url 'main:increment_amount' item.id %}">
-                {% csrf_token %}
-                <button type="submit">Tambahkan</button>
-                </form>
-            <form method="post" action="{% url 'main:decrement_amount' item.id %}">
-                {% csrf_token %}
-                <button type="submit">Kurangkan</button>
-                </form>
-                <form method="post" action="{% url 'main:delete_item' item.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Hapus</button>
-                    </form></td>
-
-        </tr>
-    {% endfor %}
-</table>
-
-{% comment %} Untuk menampilkan jumlah item {% endcomment %}
-<p>Kamu menyimpan {{ jumlah_item }} jenis makanan pada aplikasi ini</p>
-
-<br />
-
-<a href="{% url 'main:create_item' %}">
-    <button>
-        Add New Item
-    </button>
-</a>
-
-<tr>
-    <td>
-        <a href="/edit_Item/{{item.pk}}">
-            <button>
-                Edit
-            </button>
-        </a>
-    </td>
-</tr>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
-
-
-
+    {% load static %}
+    <script type="application/javascript" src="{% static 'js/script.js' %}"></script>
+    
+</div>
 {% endblock content %}

@@ -23,13 +23,16 @@ def show_main(request):
     last_object = last_object.id
     # items = Item.objects.all()
     # Menghitung jumlah item yang ditambahkan
+    username = request.user.username
     jumlah_item = Item.objects.filter(user=request.user).count()
+
     context = {
         'name': 'Muhammad Nanda Pratama',
         'class': 'PBP C',
         'items': items,
         'last_object' : last_object,
         'jumlah_item': jumlah_item,
+        'username' : username,
         'last_login': request.COOKIES['last_login'],
     }
 
@@ -46,6 +49,7 @@ def create_item(request):
 
     context = {'form': form}
     return render(request, "create_item.html", context)
+
 
 def edit_item(request, id):
     # Get product berdasarkan ID

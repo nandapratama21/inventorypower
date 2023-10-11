@@ -5,29 +5,87 @@
 {% endblock meta %}
 
 {% block content %}
+<style>
+    body {
+        background-color: #121212; /* Warna background dark mode */
+    }
 
-<div class = "login">
+    .login {
+        background-color: #1e1e1e; /* Warna latar belakang form login */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin: 0 auto; /* Untuk memposisikan form ke tengah */
+        max-width: 400px; /* Lebar maksimum form login */
+        margin-top: 50px;
+    }
 
+    .login h1 {
+        color: #fff; /* Warna teks judul login */
+        text-align: center;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"] {
+        background-color: #fff; /* Warna latar belakang input field */
+        color: #000; /* Warna teks input field */
+        border: none;
+        padding: 10px;
+        margin: 0 auto; /* Untuk memposisikan input ke tengah */
+        margin-bottom: 10px;
+        border-radius: 5px;
+        display: block; /* Agar input berada di baris yang berbeda */
+        width: 100%; /* Lebar input 100% */
+    }
+
+    .login .login_btn {
+        background-color: #46989d; /* Warna tombol login */
+        color: #fff; /* Warna teks tombol login */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: block; /* Agar tombol berada di baris yang berbeda */
+        margin: 0 auto; /* Untuk memposisikan tombol ke tengah */
+    }
+
+    .login .login_btn:hover {
+        background-color: #357a80; /* Warna tombol hover */
+    }
+
+    .login a {
+        color: #fff; /* Warna teks link Register Now */
+        text-decoration: none;
+        display: block; /* Agar link berada di baris yang berbeda */
+        text-align: center; /* Untuk mengatur teks ke tengah */
+        margin-top: 10px; /* Jarak antara link dan tombol login */
+    }
+
+    .login a:hover {
+        text-decoration: underline;
+    }
+
+    /* Mengubah warna teks "Don't have an account yet?" menjadi putih */
+    .login p {
+        color: #fff;
+    }
+</style>
+
+<div class="login">
     <h1>Login</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <div class="form-group">
+            <input type="text" name="username" placeholder="Username" class="form-control">
+        </div>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input class="btn login_btn" type="submit" value="Login">
+        </div>
     </form>
 
     {% if messages %}
@@ -36,10 +94,9 @@
                 <li>{{ message }}</li>
             {% endfor %}
         </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+    {% endif %}
 
+    <p style="padding-left: 80px; padding-top: 20px;">Don't have an account yet? <a style="padding-right: 80px;" href="{% url 'main:register' %}">Register Now</a></p>
 </div>
 
 {% endblock content %}
