@@ -14,6 +14,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseNotFound
 
 
 @login_required(login_url='/login')
@@ -65,6 +67,13 @@ def edit_item(request, id):
 
     context = {'form': form}
     return render(request, "edit_item.html", context)
+
+def delete_item(request,id):
+    deleted_item = Item.objects.get(pk=id) # ambil objeknya
+    form = ItemForm(request.POST or None, instance=deleted_item)
+    deleted_item.delete() # hapus objeknya
+    return HttpResponseRedirect(reverse('main:show_main'))
+
 
 
 
@@ -130,14 +139,46 @@ def decrement_amount(request,id):
     updated_item = Item.objects.get(pk=id) # ambil objeknya
     updated_item.amount -= 1 # decrement 1
     updated_item.save() # simpan nilainya
+    
     return HttpResponseRedirect(reverse('main:show_main'))
 
-def delete_item(request,id):
-    deleted_item = Item.objects.get(pk=id) # ambil objeknya
-    deleted_item.delete() # hapus objeknya
-    return HttpResponseRedirect(reverse('main:show_main'))
+
 
 def item_id_last(request):
     last_object = Item.objects.last()
     return render(reverse('main:show_main'), {'last_object': last_object})
+
+def get_item_json(request):
+    product_item = Item.objects.all()
+    return HttpResponse(serializers.serialize('json', product_item))
+
+@csrf_exempt
+def add_item_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        # nilai awal amountnya adalah 1
+        amount = 1
+        user = request.user
+
+        new_product = Item(name=name, amount=amount, price=price, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+
+@csrf_exempt
+def delete_item_ajax(request,id):
+    if request.method == 'POST':
+        try:
+            item_to_delete = Item.objects.get(pk=id)  # Cari item berdasarkan ID
+            item_to_delete.delete()  # Hapus item
+            return HttpResponse(b"DELETED", status=204)  # Respons dengan status 204 (No Content) menandakan penghapusan sukses
+        except Item.DoesNotExist:
+            return HttpResponseNotFound("Item not found")
+    
+    return HttpResponseNotFound()
 

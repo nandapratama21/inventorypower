@@ -8,6 +8,9 @@ from main.views import decrement_amount;
 from main.views import delete_item;
 from main.views import edit_item;
 from main.views import item_id_last;
+from main.views import add_item_ajax
+from main.views import get_item_json
+from main.views import delete_item_ajax
 
 app_name = 'main'
 
@@ -26,4 +29,7 @@ urlpatterns = [
     path('delete_item/<int:id>/', delete_item, name='delete_item'),
     path('edit_item/<int:id>/', edit_item, name='edit_item'),
     path('last_object', item_id_last, name='last_object'),
+    path('get-item/', get_item_json, name='get_item_json'),
+    path('create-item-ajax/', add_item_ajax, name='add_item_ajax'),
+    path('delete-item-ajax/<int:id>/', delete_item_ajax, name='delete_item_ajax'),
 ]

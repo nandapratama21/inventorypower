@@ -168,3 +168,33 @@ Kesimpulannya adalah Tailwind lebih cocok digunakan jika kita cenderung ingin me
 Jawaban: 
 - Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin. : Saya mengikuti cara di tutorial, namun dengan kustomisasi halaman tersebut sesuai dengan tema aplikasi saya.  
 - Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card. : Saya mencari caranya di sumber lain, dan saya pun mengkustomisasi halaman daftar inventori menjadi lebih berwarna, saya memilih warna biru muda.
+
+TUGAS 6
+
+1. Jelaskan perbedaan antara _asynchronous programming_ dengan _synchronous programming_.  
+Jawaban: _Synchronous programming_ yaitu tugas yang dijalankan pada program tersebut harus dijalankan terlebih dahulu lalu kemudian bisa menjalankan tugas berikutnya. Contohnya, ketika ada perintah pertama dan perintah kedua, perintah pertama harus diselesaikan terlebih dahulu supaya bisa lanjut ke perintah kedua.
+Sedangkan _asynchronous programming_ sifatnya lebih fleksibel. Kita bisa membuat program menjalankan tugas selanjutnya tanpa harus menunggu tugas sebelumnya selesai terlebih dahulu, contohnya, ketika ada perintah pertama dan perintah kedua, program tidak perlu menunggu perintah pertama selesai untuk menjalankan perintah kedua. 
+
+2. Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma _event-driven programming_. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.  
+Jawaban: Event-driven Programming adalah paradigma pemograman yang alur programnya ditentukan berdasarkan _event_ yang terjadi, contohnya, pada JavaScript dan AJAX, kita _select_ button _new item_ untuk menambahkan item, yang artinya dalam kode, itu merupakan _event_ yang menjalankan fungsi untuk menambahkan _item_.  
+
+3. Jelaskan penerapan _asynchronous programming_ pada AJAX.  
+Jawaban: Pada AJAX, penerapan _asynchronous programming_ adalah ketika _browser_ meminta permintaan data dari _server_, JavaScript tidak harus menunggu tugas tersebut selesai terlebih dahulu, melainkan JavaScript bisa lanjut ke tugas berikutnya sambil menunggu data tersebut datang.  
+
+4. Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada _library_ jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.  
+Jawaban: Fetch API  menggunakan konsep _promises_, yang membuatnya lebih mudah dalam menangani respons _asynchronous_. Ini memungkinkan penanganan kesalahan yang lebih baik. Selain itu, Fetch API juga lebih banyak mendukung metode dan _header_ HTTP dibangkan dengan AJAX biasa. Fetch API juga merupakan teknologi terbaru karena baru diluncurkan ketika ECMAScript 2020. Sedangkan jQuery dirancang untuk menyederhanakan tugas-tugas yang melibatkan JavaScript di berbagai _browser_, sehingga perbedaan implementasi pada _browser_ yang berbeda tidak jadi masalah. Menurut saya, teknologi yang lebih baik saya gunakan adalah Fetch API, karena teknologinya paling baru dan mudah digunakan karena adanya fitur _promise_.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
+Jawaban: - Ubahlah kode cards data item agar dapat mendukung AJAX GET dan Lakukan pengambilan item menggunakan AJAX GET.: Saya melakukannya dengan mengikuti cara di tutorial, hanya saja isi htmlstring nya diganti menjadi sesuai dengan tugas 6 ini, yaitu menggunakan Card.  
+- Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan item: Mirip dengan di tutorial, hanya saja saya mengubah sedikit agar sesuai dengan aplikasi _web_ saya.  
+- Buatlah fungsi view baru untuk menambahkan item baru ke dalam basis data: Saya membuat fungsi yang bernama add_item_ajax untuk menambahkan item baru ke dalam basis data, isi dari fungsi tersebut saya sesuaikan sesuai Model pada item saya.
+- Buatlah path /create-ajax/ yang mengarah ke fungsi view yang baru kamu buat: Caranya mirip dengan di tutorial, yaitu saya import dahulu fungsinya, kemudian menambahkan path create-item-ajax/ pada fungsi urls.py  
+- Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/: Caranya mirip dengan di tutorial, yaitu saya menambahkan add_item_ajax pada fungsi _add_ itemnya sehingga di Fetch, dibuat seperti ini. "{% url 'main:add_item_ajax' %}".  
+-  Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar item terbaru tanpa reload halaman utama secara keseluruhan: Saya melakukannya dengan melakukan   
+```js
+fetch("{% url 'main:add_item_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+```
+- Melakukan perintah collectstatic: Saya sudah melakukannya dengan perintah `python manage.py collectstatic` pada _command line_.

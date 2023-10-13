@@ -19,6 +19,7 @@
         border: none;
         color: black;
     }
+    
 
     
 </style>
@@ -28,46 +29,169 @@
 <div id = "table_1" class="container mt-4">
     <h1 class="display-4 text-center mb-5">Food Inventory</h1>
 
-    <div  id="table_2" class="row row-light">
-        {% for item in items %}
-            <div class="col-md-4 mb-4">
-                <div  {% if item.id == last_object %} class="card" style="background-color: rgba(37, 170, 207, 0.7);" {% endif %} {% if item.id != last_object %} class="card text-dark" style=" background-color: rgba(255, 255, 255, 0.7);"   {% endif %}>
-                    <div {% if item.id == last_object %}  class="card-header border-black" {% endif %} {% if item.id != last_object %} id="card_main {{item.id}}" class="card-header border-black" {% endif %}>
-                        <h5 class="card-title">{{ item.name }}</h5>
+    <div  id="table_2" class="row row-light"></div>
+    <script>    
+        let countitem = 0
+        async function getItem() {
+            return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+        }
+        function incrementAmount(itemid) {
+            
+            const id = "/increment_amount/";
+            let result = id.concat(String(itemid),"/");
+            
+            let itemnumbernya = "itemnumber "
+            itemnumbernya = itemnumbernya.concat(itemid)
+            let jumlah_sekarang = document.getElementById(itemnumbernya).textContent.split(" ")[1];
+            jumlah_sekarang = parseInt(jumlah_sekarang)
+            jumlah_sekarang += 1;
+            document.getElementById(itemnumbernya).textContent = "Jumlah: ".concat(jumlah_sekarang)
+            return fetch(result);
+
+        }
+        function decrementAmount(itemid) {
+            const id = "/decrement_amount/";
+            let result = id.concat(String(itemid),"/");
+            
+            let itemnumbernya = "itemnumber "
+            itemnumbernya = itemnumbernya.concat(itemid)
+            let jumlah_sekarang = document.getElementById(itemnumbernya).textContent.split(" ")[1];
+            jumlah_sekarang = parseInt(jumlah_sekarang)
+            if (jumlah_sekarang == 0) {
+                return
+            }
+            jumlah_sekarang -= 1;
+            document.getElementById(itemnumbernya).textContent = "Jumlah: ".concat(jumlah_sekarang)
+            return fetch(result);
+
+        }
+    
+        async function refreshItem() {
+            document.getElementById("table_2").innerHTML = "";
+            const items = await getItem();
+            let htmlString = "" ;
+
+            countitem = items.length
+            items.forEach((item,index) => {
+    
+                if (index != items.length - 1) {
+                htmlString += `
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="background-color: rgba(255, 255, 255, 0.7);  ">
+                        <div class="card-header border-black">
+                            <h5 class="card-title">${item.fields.name}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p id="itemnumber ${item.pk}" class="card-text">Jumlah: ${item.fields.amount}</p>
+                            <p class="card-text">Harga: Rp ${item.fields.price}</p>
+                            <p class="card-text">Deskripsi: ${item.fields.description}</p>
+                            <p class="card-text">Tanggal Ditambahkan: ${item.fields.date_added}</p>
+                        </div>
+                        <div class="card-footer border-black d-flex flex-wrap justify-content-around">
+                        <button onclick="incrementAmount(${item.pk})" class="btn btn-success btn-sm m-1">Tambahkan</button>
+                        <button onclick="decrementAmount(${item.pk})" class="btn btn-warning btn-sm m-1">Kurangkan</button>
+                        <button onclick="editItem(${item.pk})" class="btn btn-secondary btn-sm m-1">Edit</button>
+                        <button onclick="deleteItem(${item.pk})" class="btn btn-danger btn-sm m-1">Hapus</button>
                     </div>
-                    <div class="card-body" >
-                        <p class="card-text">Jumlah: {{ item.amount }}</p>
-                        <p class="card-text">Harga: Rp {{ item.price }}</p>
-                        <p class="card-text">Deskripsi: {{ item.description }}</p>
-                        <p class="card-text">Tanggal Ditambahkan: {{ item.date_added }}</p>
                     </div>
-                    <div class="card-footer text-right border-black d-flex justify-content-end" style="padding-right: 50px;">
-                        <form method="post" action="{% url 'main:increment_amount' item.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-success btn-sm mx-1">Tambahkan</button>
-                        </form>
-                        <form method="post" action="{% url 'main:decrement_amount' item.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-warning btn-sm mx-1">Kurangkan</button>
-                        </form>
-                        <form method="post" action="{% url 'main:edit_item' item.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-secondary btn-sm mx-1">Edit</button>
-                        </form>
-                        <form method="post" action="{% url 'main:delete_item' item.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm mx-1">Hapus</button>
-                        </form>
+                </div>`;
+            }
+            else {
+                htmlString += `
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="background-color: rgba(37, 170, 207, 0.7);  ">
+                        <div class="card-header border-black">
+                            <h5 class="card-title">${item.fields.name}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p id="itemnumber ${item.pk}" class="card-text">Jumlah: ${item.fields.amount}</p>
+                            <p class="card-text">Harga: Rp ${item.fields.price}</p>
+                            <p class="card-text">Deskripsi: ${item.fields.description}</p>
+                            <p class="card-text">Tanggal Ditambahkan: ${item.fields.date_added}</p>
+                        </div>
+                        
+                        <div class="card-footer border-black d-flex flex-wrap justify-content-around">
+                        <button onclick="incrementAmount(${item.pk})" class="btn btn-success btn-sm m-1">Tambahkan</button>
+                        <button onclick="decrementAmount(${item.pk})" class="btn btn-warning btn-sm m-1">Kurangkan</button>
+                        <button onclick="editItem(${item.pk})" class="btn btn-secondary btn-sm m-1">Edit</button>
+                        <button onclick="deleteItem(${item.pk})" class="btn btn-danger btn-sm m-1">Hapus</button>
                     </div>
-                    
+
+
+
+                    </div>
+                </div>`;
+                
+            }
+
+
+
+            });
+    
+            document.getElementById("table_2").innerHTML = htmlString;
+        }
+        function addItem() {
+        fetch("{% url 'main:add_item_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItem)
+        countitem = countitem + 1;
+        document.getElementById("JumlahItem").textContent = "Kamu menyimpan ".concat(String(countitem), " jenis makanan pada aplikasi ini")
+        document.getElementById("form").reset()
+        return false
+    }
+            function deleteItem(itemid) {
+            const id = "/delete-item-ajax/";
+            let result = id.concat(String(itemid),"/");
+            fetch(result, {
+            method: "POST",
+        }).then(refreshItem)
+            countitem = countitem - 1;
+            document.getElementById("JumlahItem").textContent = "Kamu menyimpan ".concat(String(countitem), " jenis makanan pada aplikasi ini")
+            return false
+
+        }
+        refreshItem();
+    </script>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"  style="background-color: rgba(37, 170, 207, 0.2); backdrop-filter: blur(10px);">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="addItem()" type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Item</button>
                 </div>
             </div>
-        {% endfor %}
+        </div>
     </div>
+    
+    
 
-    <p>Kamu menyimpan {{ jumlah_item }} jenis makanan pada aplikasi ini</p>
+    <p id = "JumlahItem">Kamu menyimpan {{ jumlah_item }} jenis makanan pada aplikasi ini</p>
 
-    <a href="{% url 'main:create_item' %}" class="btn btn-primary">Tambahkan Item Baru</a>
+    <a href="{% url 'main:create_item' %}" class="btn" style="background-color: rgba(32, 119, 200, 0.8); backdrop-filter: blur(10px); color: white;">Tambahkan Item Baru</a>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Item by AJAX (beta)</button>
 
     {% load static %}
     <script type="application/javascript" src="{% static 'js/script.js' %}"></script>

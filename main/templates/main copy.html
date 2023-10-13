@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style id="body">
+    
+    body {
+        background-image: url("static/images/Background.png");
+        background-repeat: no-repeat;
+        background-color: #1e1e1e;
+        background-size: cover;
+    }
+    .btn-lamp-dark {
+        background: transparent;
+        border: none;
+        color: white;
+    }
+    .btn-lamp-light {
+        background: transparent;
+        border: none;
+        color: black;
+    }
+    
+
+    
+</style>
+{% include 'navbar.html' %}
+{% load static %}
+
+<div id = "table_1" class="container mt-4">
+    <h1 class="display-4 text-center mb-5">Food Inventory</h1>
+
+    <div  id="table_2" class="row row-light">
+        {% for item in items %}
+            <div class="col-md-4 mb-4">
+                <div  {% if item.id == last_object %} class="card" style="background-color: rgba(37, 170, 207, 0.7);" {% endif %} {% if item.id != last_object %} class="card text-dark" style=" background-color: rgba(255, 255, 255, 0.7);"   {% endif %}>
+                    <div {% if item.id == last_object %}  class="card-header border-black" {% endif %} {% if item.id != last_object %} id="card_main {{item.id}}" class="card-header border-black" {% endif %}>
+                        <h5 class="card-title">{{ item.name }}</h5>
+                    </div>
+                    <div class="card-body" >
+                        <p class="card-text">Jumlah: {{ item.amount }}</p>
+                        <p class="card-text">Harga: Rp {{ item.price }}</p>
+                        <p class="card-text">Deskripsi: {{ item.description }}</p>
+                        <p class="card-text">Tanggal Ditambahkan: {{ item.date_added }}</p>
+                    </div>
+                    <div class="card-footer border-black d-flex flex-wrap justify-content-around">
+                        <form method="post" action="{% url 'main:increment_amount' item.id %}" class="m-1">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm">Tambahkan</button>
+                        </form>
+                        <form method="post" action="{% url 'main:decrement_amount' item.id %}" class="m-1">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning btn-sm">Kurangkan</button>
+                        </form>
+                        <form method="post" action="{% url 'main:edit_item' item.id %}" class="m-1">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+                        </form>
+                        <form method="post" action="{% url 'main:delete_item' item.id %}" class="m-1">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <p>Kamu menyimpan {{ jumlah_item }} jenis makanan pada aplikasi ini</p>
+
+    <a href="{% url 'main:create_item' %}" class="btn" style="background-color: rgba(32, 119, 200, 0.8); backdrop-filter: blur(10px); color: white;">Tambahkan Item Baru</a>
+
+    {% load static %}
+    <script type="application/javascript" src="{% static 'js/script.js' %}"></script>
+    
+</div>
+{% endblock content %}
