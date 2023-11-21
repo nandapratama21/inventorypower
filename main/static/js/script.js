@@ -1,3 +1,4 @@
+
 function setDarkMode() {
     document.body.classList.remove("light-mode");
     document.body.classList.add("dark-mode");
@@ -14,6 +15,19 @@ function setDarkMode() {
     table_2.classList.add("table-dark");
     body.innerHTML = `body {margin: 0; height: 100vh; background-image: linear-gradient(to bottom, #125865, #93817d); 
         background-attachment: fixed; background-size: cover; background-repeat: no-repeat;
+        }     
+        .btn-lamp-dark {
+            background: transparent;
+            border: none;
+            color: white;
+        }
+        .btn-lamp-light {
+            background: transparent;
+            border: none;
+            color: black;
+        }
+        .footer {
+            background-color: blue;
         }`;
     modeLightDark.classList.remove("btn-lamp-light");
     modeLightDark.classList.add("btn-lamp-dark");
@@ -40,7 +54,21 @@ function setLightMode() {
     const body = document.getElementById("body");
     table_1.classList.remove("table-dark"); 
     table_2.classList.remove("table-dark");
-    body.innerHTML = `body { background-image: url("static/images/Background.png"); background-color: #fff; background-repeat: no-repeat; background-size: cover;}`;
+    body.innerHTML = `body { background-image: url("static/images/Background.png"); background-color: #fff; background-repeat: no-repeat; background-size: cover;} 
+
+    .btn-lamp-dark {
+        background: transparent;
+        border: none;
+        color: white;
+    }
+    .btn-lamp-light {
+        background: transparent;
+        border: none;
+        color: black;
+    }
+    .footer {
+        background-color: blue;
+    }`;
     modeLightDark.classList.remove("btn-lamp-dark");
     modeLightDark.classList.add("btn-lamp-light");
     main_nav.classList.remove("navbar-dark");

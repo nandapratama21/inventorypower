@@ -21,8 +21,6 @@ from django.http import HttpResponseNotFound
 @login_required(login_url='/login')
 def show_main(request):
     items = Item.objects.filter(user=request.user)
-    last_object = Item.objects.last()
-    last_object = last_object.id
     # items = Item.objects.all()
     # Menghitung jumlah item yang ditambahkan
     username = request.user.username
@@ -32,7 +30,6 @@ def show_main(request):
         'name': 'Muhammad Nanda Pratama',
         'class': 'PBP C',
         'items': items,
-        'last_object' : last_object,
         'jumlah_item': jumlah_item,
         'username' : username,
         'last_login': request.COOKIES['last_login'],
@@ -149,7 +146,7 @@ def item_id_last(request):
     return render(reverse('main:show_main'), {'last_object': last_object})
 
 def get_item_json(request):
-    product_item = Item.objects.all()
+    product_item = Item.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', product_item))
 
 @csrf_exempt
