@@ -164,4 +164,4 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'access-control-allow-origin',
 ]
-CSRF_TRUSTED_ORIGINS = ['https://muhammad-nanda21-tugas.pbp.cs.ui.ac.id/']
+CSRF_TRUSTED_ORIGINS = ['https://muhammad-nanda21-tugas.pbp.cs.ui.ac.id']
