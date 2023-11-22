@@ -11,6 +11,7 @@ from main.views import item_id_last;
 from main.views import add_item_ajax
 from main.views import get_item_json
 from main.views import delete_item_ajax
+from main.views import create_item_flutter,logout
 
 app_name = 'main'
 
@@ -32,4 +33,8 @@ urlpatterns = [
     path('get-item/', get_item_json, name='get_item_json'),
     path('create-item-ajax/', add_item_ajax, name='add_item_ajax'),
     path('delete-item-ajax/<int:id>/', delete_item_ajax, name='delete_item_ajax'),
+    path('create-flutter/', create_item_flutter, name='create_item_flutter'),
+    path('logout/', logout, name='logout'),
+
+
 ]
