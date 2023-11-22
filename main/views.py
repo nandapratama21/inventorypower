@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.http import HttpResponse
@@ -187,7 +188,7 @@ def create_item_flutter(request):
         
         data = json.loads(request.body)
 
-        new_product = Product.objects.create(
+        new_product = Item.objects.create(
             user = request.user,
             name = data["name"],
             price = int(data["price"]),
